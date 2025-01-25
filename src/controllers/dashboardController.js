@@ -58,5 +58,18 @@ export const getLogs = async (req, res) => {
     res.status(200).json({ logs });
   } catch (error) {
     res.status(500).json({ error: "Error fetching logs", details: error });
+  };
+
+};
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const { userId } = req;
+
+    const users = await User.find({ _id: { $ne: userId } });
+
+    res.status(200).json({ users });
+  } catch (err) {
+    res.status(500).json({ error: "Error fetching users", details: err.message });
   }
 };
