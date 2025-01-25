@@ -1,11 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectDB from "../src/config/database.js";
-import userRoutes from "../src/routes/userRoutes.js";
-import beneficiaryRoutes from "../src/routes/beneficiaryRoutes.js";
-import tokenRoutes from "../src/routes/tokenRoutes.js";
-import departmentRoutes from "../src/routes/departmentRoutes.js";
-import dashboardRoutes from "../src/routes/dashboardRoutes.js";
+import connectDB from "./src/config/database.js";
+import userRoutes from "./src/routes/userRoutes.js";
+import beneficiaryRoutes from "./src/routes/beneficiaryRoutes.js";
+import tokenRoutes from "./src/routes/tokenRoutes.js";
+import departmentRoutes from "./src/routes/departmentRoutes.js";
+import dashboardRoutes from "./src/routes/dashboardRoutes.js";
 
 dotenv.config();
 
