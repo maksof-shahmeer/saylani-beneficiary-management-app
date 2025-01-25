@@ -19,12 +19,10 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     
-    // Check if user exists and password matches
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Create JWT token
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,

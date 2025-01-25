@@ -30,8 +30,7 @@ export const getBeneficiaryByCNIC = async (req, res) => {
 
 // Update beneficiary status
 export const updateBeneficiaryStatus = async (req, res) => {
-  const { cnic } = req.params;
-  const { status } = req.body;
+  const { cnic, status } = req.params;
 
   try {
     const beneficiary = await Beneficiary.findOneAndUpdate({ cnic }, { status }, { new: true });

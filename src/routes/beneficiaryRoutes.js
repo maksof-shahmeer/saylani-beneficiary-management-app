@@ -5,19 +5,14 @@ import {
   updateBeneficiaryStatus,
   getAllBeneficiaries,
 } from "../controllers/beneficiaryController.js";
+import verifyToken from "../middlewares/authMiddleware.js";
+
 
 const router = express.Router();
 
-// Create a new beneficiary
-router.post("/", createBeneficiary);
-
-// Get a beneficiary by CNIC
-router.get("/:cnic", getBeneficiaryByCNIC);
-
-// Update a beneficiary's status
-router.patch("/:cnic/status", updateBeneficiaryStatus);
-
-// Get all beneficiaries
-router.get("/", getAllBeneficiaries);
+router.post("/", verifyToken, createBeneficiary);
+router.get("/:cnic", verifyToken, getBeneficiaryByCNIC);
+router.patch("/:cnic/:status", verifyToken, updateBeneficiaryStatus);
+router.get("/", verifyToken, getAllBeneficiaries);
 
 export default router;

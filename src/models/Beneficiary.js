@@ -4,7 +4,7 @@ const beneficiarySchema = new mongoose.Schema({
   cnic: {
     type: String,
     required: true,
-    unique: true, // Ensures that each CNIC is unique
+    unique: true, 
     minlength: 13,
     maxlength: 13,
   },
@@ -16,7 +16,7 @@ const beneficiarySchema = new mongoose.Schema({
     type: String,
     required: false,
     validate: {
-      validator: (value) => /^(\+92|0)?3\d{9}$/.test(value), // Validates Pakistani mobile numbers
+      validator: (value) => /^(\+92|0)?3\d{9}$/.test(value),
       message: "Invalid phone number format.",
     },
   },
@@ -27,12 +27,12 @@ const beneficiarySchema = new mongoose.Schema({
   purpose: {
     type: String,
     required: true,
-    enum: ["Financial Aid", "Medical Assistance", "Education Support"], // Example purposes
+    enum: ["Financial Aid", "Medical Assistance", "Education Support"], 
   },
   token: {
     type: String,
     required: true,
-    unique: true, // A unique token for tracking
+    unique: true, 
   },
   department: {
     type: String,

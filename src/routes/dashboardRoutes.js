@@ -1,12 +1,12 @@
 import express from "express";
 import { getLogs, getDashboardInsights, searchBeneficiaries, getAllUsers} from "../controllers/dashboardController.js";
-import { authMiddleware } from "../middlewares/authMiddleware.js";
+import verifyToken from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/logs", getLogs);
-router.get("/insights", getDashboardInsights);
-router.get("/searchUser", searchBeneficiaries);
-router.get("/getAllUsers", getAllUsers);
+router.get("/logs",verifyToken, getLogs);
+router.get("/insights",verifyToken, getDashboardInsights);
+router.get("/searchUser",verifyToken, searchBeneficiaries);
+router.get("/getAllUsers",verifyToken, getAllUsers);
 
 export default router;

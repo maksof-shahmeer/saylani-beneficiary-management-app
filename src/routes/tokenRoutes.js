@@ -5,19 +5,13 @@ import {
   updateTokenStatus,
   getAllTokens,
 } from "../controllers/tokenController.js";
+import verifyToken from "../middlewares/authMiddleware.js";
+
 
 const router = express.Router();
-
-// Create a token
-router.post("/", createToken);
-
-// Get a token by ID
-router.get("/:tokenId", getTokenDetails);
-
-// Update a token's status
-router.patch("/:tokenId/status", updateTokenStatus);
-
-// Get all tokens
-router.get("/", getAllTokens);
+router.post("/", verifyToken, createToken);
+router.get("/:tokenId", verifyToken, getTokenDetails);
+router.patch("/:tokenId/:status", verifyToken, updateTokenStatus);
+router.get("/", verifyToken, getAllTokens);
 
 export default router;

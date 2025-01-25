@@ -1,20 +1,17 @@
 import Beneficiary from "../models/Beneficiary.js";
 import Token from "../models/Token.js";
-import Log from "../models/Log.js"; // Assuming there is a model for logs like this
+import User from "../models/User.js";
+import Log from "../models/Log.js"; 
 
-// Fetch daily insights
 export const getDashboardInsights = async (req, res) => {
   try {
-    // Total visitors categorized as new/returning
     const newBeneficiaries = await Beneficiary.countDocuments({ firstVisit: true });
     const returningBeneficiaries = await Beneficiary.countDocuments({ firstVisit: false });
 
-    // Department-wise activity stats
     const departmentStats = await Beneficiary.aggregate([
       { $group: { _id: "$department", count: { $sum: 1 } } }
     ]);
 
-    // Tokens (Active/Completed)
     const activeTokens = await Token.countDocuments({ status: "Active" });
     const completedTokens = await Token.countDocuments({ status: "Completed" });
 
@@ -32,9 +29,8 @@ export const getDashboardInsights = async (req, res) => {
   }
 };
 
-// Search beneficiaries by CNIC, phone number, or name
 export const searchBeneficiaries = async (req, res) => {
-  const { searchTerm } = req.query; // CNIC, phone number, or name
+  const { searchTerm } = req.query; 
 
   try {
     const results = await Beneficiary.find({
@@ -51,10 +47,9 @@ export const searchBeneficiaries = async (req, res) => {
   }
 };
 
-// Access detailed logs for audits
 export const getLogs = async (req, res) => {
   try {
-    const logs = await Log.find().sort({ createdAt: -1 }); // Sort by creation date, descending
+    const logs = await Log.find().sort({ createdAt: -1 }); 
     res.status(200).json({ logs });
   } catch (error) {
     res.status(500).json({ error: "Error fetching logs", details: error });

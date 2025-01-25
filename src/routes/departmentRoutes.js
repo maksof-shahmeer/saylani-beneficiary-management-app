@@ -1,10 +1,12 @@
 import express from "express";
 import { createDepartment, getAllDepartments, updateDepartment } from "../controllers/departmentController.js";
+import verifyToken from "../middlewares/authMiddleware.js";
+
 
 const router = express.Router();
 
-router.post("/", createDepartment); // Create a new department
-router.get("/", getAllDepartments); // Get all departments
-router.put("/:id", updateDepartment); // Update a department by ID
+router.post("/", verifyToken,createDepartment); 
+router.get("/", verifyToken,getAllDepartments); 
+router.put("/:id/:name",verifyToken, updateDepartment);
 
 export default router;

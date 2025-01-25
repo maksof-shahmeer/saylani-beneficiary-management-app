@@ -1,6 +1,5 @@
 import Token from "../models/Token.js";
 
-// Generate a new token
 export const createToken = async (req, res) => {
   const { cnic, department } = req.body;
 
@@ -14,7 +13,6 @@ export const createToken = async (req, res) => {
   }
 };
 
-// Get token details by ID
 export const getTokenDetails = async (req, res) => {
   const { tokenId } = req.params;
 
@@ -28,10 +26,8 @@ export const getTokenDetails = async (req, res) => {
   }
 };
 
-// Update token status
 export const updateTokenStatus = async (req, res) => {
-  const { tokenId } = req.params;
-  const { status } = req.body;
+  const { tokenId, status } = req.params;
 
   try {
     const token = await Token.findOneAndUpdate({ tokenId }, { status }, { new: true });
@@ -43,7 +39,6 @@ export const updateTokenStatus = async (req, res) => {
   }
 };
 
-// Get all tokens
 export const getAllTokens = async (req, res) => {
   try {
     const tokens = await Token.find();

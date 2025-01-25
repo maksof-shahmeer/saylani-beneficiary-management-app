@@ -22,9 +22,8 @@ export const getAllDepartments = async (req, res) => {
 
 export const updateDepartment = async (req, res) => {
   try {
-    const { id } = req.params;
-    const updates = req.body;
-    const department = await Department.findByIdAndUpdate(id, updates, { new: true });
+    const { id, name } = req.params;
+    const department = await Department.findByIdAndUpdate(id, name, { new: true });
     res.status(200).json(department);
   } catch (error) {
     res.status(500).json({ error: "Error updating department", details: error });
